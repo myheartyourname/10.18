@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轮播图</title>
+	<script src='../../jquery-3.2.1/jquery-3.2.1.js'></script>
+	<style>
+	    *{
+	    	margin: 0;
+	    	padding: 0;
+	    	list-style: none;
+	    }
+		.win{
+			width: 600px;
+			height: 400px;
+			margin: 20px auto;
+			position: relative;
+		}
+		.imgs{
+			width: 100%;
+			height: 100%;
+			position: relative;
+			overflow: hidden;
+		}
+		.imgs>li{
+			width: 100%;
+			height: 100%;
+			background: red;
+			position: absolute;
+			top: 0;
+			left: 100%;
+			/* display: none; */
+		}
+		.imgs>li:nth-child(2){
+            background: pink;
+		}
+		.imgs>li:nth-child(3){
+            background: yellowgreen;
+		}
+		.imgs>li:nth-child(4){
+            background: skyblue;
+		}
+		.imgs>li:first-child{
+			left: 0;
+		}
+		.banner{
+			width: 90px;
+			height: 15px;
+			/* background: #cc6677; */
+			position: absolute;
+			left: calc(50% - 45px);
+			bottom: 20px;
+		}
+		.banner>li{
+			width: 15px;
+			height: 15px;
+			background: #ff6700;
+			border-radius: 50%;
+			margin-right: 10px;
+			float: left;
+		}
+		.banner>li:last-child{
+			margin-right: 0;
+		}
+		.btnL{
+			width: 40px;
+			height: 60px;
+			background: yellow;
+			font-size: 30px;
+			color: #000;
+			text-align: center;
+			line-height: 60px;
+			position: absolute;
+			top: calc(50% - 30px);
+			left: 0;
+		}
+		.btnR{
+			width: 40px;
+			height: 60px;
+			background: yellow;
+			font-size: 30px;
+			color: #000;
+			text-align: center;
+			line-height: 60px;
+			position: absolute;
+			top: calc(50% - 30px);
+			right: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="win">
+		<ul class="imgs">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<ul class="banner">
+			<li style="background:#45ff00"></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<!-- <div class="btnL"><</div>
+		<div class="btnR">></div> -->
+	</div>
+	<script>
+		$(function(){
+			let lis=$('.imgs>li');
+			let lis1=$('.banner>li');
+			let imgw=lis.width();
+			let now=next=0;
+			let t=setInterval(move,3000);
+			let btnR=$('.btnR');
+			let btnL=$('.btnL');
+			// btnL.on('click');
+			// btnR.on('click');
+            function move(){
+            	// btnL.triggerHandler('click');
+            	btnR.triggerHandler('click');
+			    next++;
+			    if (next==lis.length){
+			    	next=0;
+			    }
+			    lis.eq(next).css('left',imgw);
+			    lis.eq(next).animate({left:0});
+			    lis.eq(now).animate({left:-imgw});
+			    lis1.eq(next).css('background','#45ff00');
+			    lis1.eq(now).css('background','#ff6700');
+			    now=next;
+            }
+		})
+	</script>
+</body>
+</html>
